@@ -1,23 +1,30 @@
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.security.SecureRandom" %>
-<%@ page import="java.math.BigInteger" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>네이버로그인</title>
-  </head>
-  <body>
-  <%
-    String clientId = "cWarsKtoZdJVOeHeZUqQ";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8080/Solocare", "UTF-8");
-    SecureRandom random = new SecureRandom();
-    String state = new BigInteger(130, random).toString();
-    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
-         + "&client_id=" + clientId
-         + "&redirect_uri=" + redirectURI
-         + "&state=" + state;
-    session.setAttribute("state", state);
- %>
-  <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-  </body>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<h2>로그인</h2>
+	</div>
+	<%
+		String error = (String)request.getAttribute("error");
+		System.out.println(error);
+		if (error != null) {
+			out.println("<div class='alert alert-danger'>");
+			out.println("아이디와 비밀번호를 확인해 주세요");
+			out.println("</div>");
+		}
+	%>
+	<form action="login" method="post">
+		<input type="text" name="id">
+		<input type="password" name="pw">
+		<input type="submit" value="로그인">
+	</form>
+	<a href="${pageContext.request.contextPath}/addmember">회원가입</a>
+	
+</body>
 </html>

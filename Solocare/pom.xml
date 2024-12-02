@@ -95,6 +95,12 @@
         <version>4.0.1</version>
         <scope>provided</scope>
     </dependency>
+    <dependency>
+	    <groupId>javax.servlet.jsp</groupId>
+	    <artifactId>javax.servlet.jsp-api</artifactId>
+	    <version>2.3.3</version>
+	    <scope>provided</scope>
+	</dependency>
     
     <!-- Apache Commons IO (파일 처리 유틸리티) -->
     <dependency>
@@ -102,6 +108,13 @@
         <artifactId>commons-io</artifactId>
         <version>2.11.0</version>
     </dependency>
+    <!-- dbconnector -->
+    <dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.33</version> <!-- 버전은 필요에 따라 최신 버전으로 변경 -->
+	</dependency>
+
 
   </dependencies>
   <build>

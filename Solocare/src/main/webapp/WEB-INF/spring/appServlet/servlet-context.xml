@@ -31,8 +31,8 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	
 	<!-- 
-		1. 핸들러 매핑
-		2. 뷰리졸브
+		1. 핸들러 매핑 // 서블릿
+		2. 뷰리졸브 // 서블릿
 		3. com.springmvc.controller.HomeController : @Controller
 	
 	 -->	

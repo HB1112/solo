@@ -50,6 +50,27 @@
                     <a href="#">안심 귀가 루트 추천</a>
                 </div>
             </div>
+            <%
+            	
+            if (request.getSession().getAttribute("mem") != null){
+            		
+            %>
+            		 <div>
+             	  		 <p>${mem.name}님 환영합니다</p>
+             	  		 <a href="infocheck">내 정보</a>
+             	  		 <a href="logout">로그아웃</a>
+           			 </div>
+           	<% 
+            	}else {
+            %>
+            	<div>
+            		<a href="login">로그인</a>
+            	</div>
+            <%
+            	}
+            %>
+           
+            
         </nav>
     </div>
 
