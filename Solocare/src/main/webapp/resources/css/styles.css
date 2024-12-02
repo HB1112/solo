@@ -1,0 +1,95 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background: #4caf93;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    background: #3b7a63;
+    padding: 0.5rem 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
+nav a:hover {
+    background: #2f5d4b;
+    border-radius: 5px;
+}
+
+.hero {
+    background: url('<%= request.getAttribute("heroImage") != null ? request.getAttribute("heroImage") : "/images/default.jpg" %>') no-repeat center center/cover;
+    height: 400px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.cta-button {
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background: #4caf93;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.cta-button:hover {
+    background: #3b7a63;
+}
+
+.section {
+    padding: 2rem;
+    text-align: center;
+}
+
+.section h2 {
+    color: #4caf93;
+}
+
+.section p {
+    margin: 1rem 0;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;
+}
+
+.feature {
+    width: 30%;
+    background: #f4f4f4;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background: #4caf93;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
