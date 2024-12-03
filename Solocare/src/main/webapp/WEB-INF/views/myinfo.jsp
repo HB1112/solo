@@ -16,6 +16,6 @@
     <p>성별: ${mem.gender}</p>
     <p>생년월일: ${mem.birth}</p>
     <p>주소: ${mem.address}</p>
-    <a href="updatemember">수정</a><a href="deletemember">회원탈퇴</a>
+    <a href="updatemember">수정</a> | <a href="deletemember">회원탈퇴</a>
 </body>
 </html>

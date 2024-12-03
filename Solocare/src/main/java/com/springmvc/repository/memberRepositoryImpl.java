@@ -44,7 +44,7 @@ public class memberRepositoryImpl implements memberRepository{
 
 	@Override
 	public member getmemberById(String id) {
-		System.out.println("memberRepositoryImpl getBookById()");
+		System.out.println("memberRepositoryImpl getmemberById()");
 		member memberInfo = null;
 		
 		return memberInfo;
