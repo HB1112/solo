@@ -21,15 +21,31 @@ public class boardServiceImpl implements boardService {
 	}
 
 	@Override
-	public ArrayList<board> readtipall(String category) {
+	public ArrayList<board> readtipall(String category, int page, int pageSize) {
 		System.out.println("boardServiceImpl readtipall()");
-		return boardrepository.readtipall(category);
+		return boardrepository.readtipall(category, page, pageSize);
 	}
 
 	@Override
 	public board readoneboard(int num) {
 		System.out.println("boardServiceImpl readoneboard");
 		return boardrepository.readoneboard(num);
+	}
+
+	@Override
+	public void updateboard(board board) {
+		boardrepository.updateboard(board);
+	}
+
+	@Override
+	public void deleteboard(int num) {
+		boardrepository.deleteboard(num);
+		
+	}
+
+	@Override
+	public int getTotalBoardCount(String category) {
+		return  boardrepository.getTotalBoardCount(category);
 	}
 	
 }

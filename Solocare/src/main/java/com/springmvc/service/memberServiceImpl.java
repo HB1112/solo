@@ -53,4 +53,12 @@ public class memberServiceImpl implements memberService{
 		memberrepository.deletemember(mem);
 	}
 
+
+
+	@Override
+	public boolean isIdExists(String id) {
+		System.out.println("memberServiecImple isIdExists()");
+		return memberrepository.isIdExists(id);
+	}
+
 }

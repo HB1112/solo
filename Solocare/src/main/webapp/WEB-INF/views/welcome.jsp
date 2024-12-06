@@ -22,8 +22,8 @@
             <div>
                 <a href="#" id="communityDropdown">커뮤니티 ▼</a>
                 <div style="display:none;" id="communityMenu">
-                    <a href="tipboard?category=tip">정보 공유 (집 꾸미기, 생활 팁)</a>
-                    <a href="#">공동구매</a>
+                    <a href="board?category=tip&page=1">정보 공유 (집 꾸미기, 생활 팁)</a>
+                    <a href="tradeboard">나눔</a>
                     <a href="#">동호회 관리 및 모집 / 필요시 대관 정보</a>
                 </div>
             </div>

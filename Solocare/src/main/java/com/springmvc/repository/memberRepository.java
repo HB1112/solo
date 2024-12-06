@@ -9,5 +9,6 @@ public interface memberRepository {
 	member loginmember(String id, String pw);
 	void updatemember(member member);
 	void deletemember(member mem);
+	boolean isIdExists(String id);
 	
 }

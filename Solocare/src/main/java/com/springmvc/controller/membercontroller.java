@@ -1,17 +1,20 @@
 package com.springmvc.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,6 +29,7 @@ public class membercontroller {
 	
 	@GetMapping("/login")
 	public String gologin() {
+		System.out.println("membercontroller gologin()");
 		return "login";
 	}
 	
@@ -97,6 +101,19 @@ public class membercontroller {
         return "memberSuccess"; // 성공 페이지로 리다이렉트
     }
 	
+	// 회원가입 중 아이디 체크
+	// 아이디 체크 메서드 추가
+	@PostMapping("/idcheck")
+	public ResponseEntity<String> idcheck(@RequestBody Map<String, String> requestData) {
+		System.out.println("membercontroller idcheck()");
+	    String id = requestData.get("id");
+	    boolean isExists = memberservice.isIdExists(id);
+	    if (isExists) {
+	        return ResponseEntity.ok("exists"); 
+	    } else {
+	        return ResponseEntity.ok("available"); 
+	    }
+	}
 	// member U 내정보 보기
 	@GetMapping("/infocheck")
 	public String checkinfo() {

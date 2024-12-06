@@ -1,17 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
-  <head>
+<head>
     <title>회원가입</title>
-  </head>
-  <body>
-  <div>
-  	<h2>회원가입</h2>
-  </div>
-  <form name="newMember" action="addMember" method="post">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 포함 -->
+</head>
+<body>
+<div>
+    <h2>회원가입</h2>
+</div>
+<form name="newMember" action="addMember" method="post">
     <div class="mb-3 row">
         <label class="col-sm-2">아이디</label>
         <div class="col-sm-3">
-            <input name="id" type="text" class="form-control" placeholder="아이디" required>
+            <input id="id" name="id" type="text" class="form-control" placeholder="아이디" required>
+            <button id="check" type="button">아이디 조회</button>
         </div>
     </div>
     <div class="mb-3 row">
@@ -101,6 +103,34 @@
         </div>
     </div>
 </form>
+<script>
+    var btn = document.querySelector("#check");
+    console.log(btn);
+    btn.addEventListener("click", idcheck);
 
-  </body>
+    function idcheck() {
+        console.log("아이디 체크 실행");
+        var inputdata = document.querySelector("#id").value;
+        console.log(inputdata);
+        $.ajax({
+            url: "/Solocare/idcheck", 
+            type: "post",
+            data: JSON.stringify({ id: inputdata }), 
+            contentType: "application/json", 
+            success: function(data) {
+                if(data === "exists") {
+                    alert("이미 존재하는 아이디입니다.");
+                } else {
+                    alert("사용 가능한 아이디입니다.");
+                }
+                console.log(data);
+            },
+            error: function(xhr, status, error) {
+                alert("아이디 조회 실패: " + xhr.responseText);
+                console.error("Error: " + error);
+            }
+        });
+    }
+</script>
+</body>
 </html>

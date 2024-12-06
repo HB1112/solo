@@ -15,4 +15,6 @@ public interface memberService {
 	void updatemember(member member);
 
 	void deletemember(member mem);
+
+	boolean isIdExists(String id);
 }

@@ -12,7 +12,7 @@
 	</div>
 	<%
 		String error = (String)request.getAttribute("error");
-		System.out.println(error);
+		System.out.println("로그인 에러 : "+error);
 		if (error != null) {
 			out.println("<div class='alert alert-danger'>");
 			out.println("아이디와 비밀번호를 확인해 주세요");
