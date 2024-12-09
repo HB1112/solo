@@ -17,7 +17,7 @@ public class boardRepositoryImpl implements boardRepository{
 	PreparedStatement pstmt = null;
 	ResultSet rs =null;
 	
-	
+	// Create addboard
 	@Override
 	public void addboard(board board) {
 		System.out.println("boardRepositoryImpl addboard()");
@@ -42,9 +42,9 @@ public class boardRepositoryImpl implements boardRepository{
 
 	}
 	
-
+	// Read All
 	@Override
-	public ArrayList<board> readtipall(String category, int page, int pageSize) {
+	public ArrayList<board> readall(String category, int page, int pageSize) {
 	    System.out.println("boardRepositoryImpl readtipall() with pagination");
 
 	    ArrayList<board> listofboard = new ArrayList<board>();
@@ -76,7 +76,7 @@ public class boardRepositoryImpl implements boardRepository{
 	    System.out.println("board DTO의 갯수는 :" + listofboard.size());
 	    return listofboard;
 	}
-
+	// 페이지네이션
 	@Override
 	public int getTotalBoardCount(String category) {
 	    int count = 0;
@@ -97,7 +97,7 @@ public class boardRepositoryImpl implements boardRepository{
 	    return count;
 	}
 
-
+	// Read one
 	@Override
 	public board readoneboard(int num) {
 		board board = new board();
@@ -122,8 +122,60 @@ public class boardRepositoryImpl implements boardRepository{
 		}
 		return board;
 	}
+	// Search 페이지 네이션
+	@Override
+	public int getsearchBoardCount(String items, String text, String category) {
+		int count = 0;
+	    try {
+	        conn = DBConnection.getConnection();
+	        String sql = "SELECT COUNT(*) FROM board WHERE " + items + " LIKE ? AND category=?";
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, "%" + text + "%");
+	        pstmt.setString(2, category);
+	        rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	            count = rs.getInt(1);
+	            System.out.println(count);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace(); // 예외 처리 추가
+	    } finally {
+	        // 자원 해제 (conn, pstmt, rs 등)
+	    }
+	    return count;
+	}
+	// Read search
+	@Override
+	public ArrayList<board> searchboards(String items, String text, String category, int page, int pageSize) {
+	    ArrayList<board> boards = new ArrayList<>();
+	    try {
+	        conn = DBConnection.getConnection();
+	        String sql = "SELECT * FROM board WHERE " + items + " LIKE ? AND category=? ORDER BY num DESC LIMIT ? OFFSET ?";
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, "%" + text + "%");
+	        pstmt.setString(2, category);
+	        pstmt.setInt(3, pageSize); // 페이지당 게시글 수
+	        pstmt.setInt(4, (page - 1) * pageSize); // OFFSET 계산
+	        rs = pstmt.executeQuery();
+	        
+	        while (rs.next()) {
+	            board b = new board();
+	            b.setNum(rs.getInt(1));
+	            b.setId(rs.getString(2));
+	            b.setSubject(rs.getString(3));
+	            b.setContent(rs.getString(4));
+	            b.setRegist_date(rs.getString(5));
+	            b.setHit(rs.getInt(6));
+	            b.setCategory(rs.getString(7));
+	            boards.add(b);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace(); // 예외 처리
+	    }
+	    return boards;
+	}
 
-
+	// Update board
 	@Override
 	public void updateboard(board board) {
 		System.out.println("boardRepositoryImpl updateboard()");
@@ -146,7 +198,7 @@ public class boardRepositoryImpl implements boardRepository{
 		
 	}
 
-
+	// Delete board
 	@Override
 	public void deleteboard(int num) {
 		System.out.println("boardRepositoryImpl deleteboard()");

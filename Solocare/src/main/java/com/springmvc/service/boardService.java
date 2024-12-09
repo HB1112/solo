@@ -9,7 +9,7 @@ public interface boardService {
 
 	void addboard(board board);
 
-	ArrayList<board> readtipall(String category, int page, int pageSize);
+	ArrayList<board> readall(String category, int page, int pageSize);
 
 	board readoneboard(int num);
 
@@ -18,5 +18,9 @@ public interface boardService {
 	void deleteboard(int num);
 
 	int getTotalBoardCount(String category);
+
+	ArrayList<board> searchboards(String items, String text, String category, int page, int pageSize);
+
+	int getsearchBoardCount(String items, String text, String category);
 
 }

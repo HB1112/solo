@@ -16,19 +16,19 @@ public class boardServiceImpl implements boardService {
 
 	@Override
 	public void addboard(board board) {
-		System.out.println("boardServiceImpl addboard()");
+	
 		boardrepository.addboard(board);
 	}
 
 	@Override
-	public ArrayList<board> readtipall(String category, int page, int pageSize) {
-		System.out.println("boardServiceImpl readtipall()");
-		return boardrepository.readtipall(category, page, pageSize);
+	public ArrayList<board> readall(String category, int page, int pageSize) {
+
+		return boardrepository.readall(category, page, pageSize);
 	}
 
 	@Override
 	public board readoneboard(int num) {
-		System.out.println("boardServiceImpl readoneboard");
+	
 		return boardrepository.readoneboard(num);
 	}
 
@@ -46,6 +46,17 @@ public class boardServiceImpl implements boardService {
 	@Override
 	public int getTotalBoardCount(String category) {
 		return  boardrepository.getTotalBoardCount(category);
+	}
+
+	@Override
+	public ArrayList<board> searchboards(String items, String text, String category, int page, int pageSize) {
+		return boardrepository.searchboards(items,text,category,page,pageSize);
+	}
+
+	@Override
+	public int getsearchBoardCount(String items, String text, String category) {
+		
+		return  boardrepository.getsearchBoardCount(items, text, category);
 	}
 	
 }

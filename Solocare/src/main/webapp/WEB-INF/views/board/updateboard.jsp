@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,11 +31,13 @@
 			<div class="mb-3 row">
 				<label class="col-sm-2 control-label" >카테고리</label>
 				<div class="col-sm-3">
-					<select name="category">
-						<option value="tip">생활팁/정보</option>
-						<option value="sell">판매</option>
-						<option value="buy">구매</option>
-					</select>
+					<div class="col-sm-3">
+		                <select name="category">
+		                    <option value="tip" <c:if test="${board.category == 'tip'}">selected</c:if>>생활팁/정보</option>
+		                    <option value="sell" <c:if test="${board.category == 'sell'}">selected</c:if>>판매</option>
+		                    <option value="buy" <c:if test="${board.category == 'buy'}">selected</c:if>>구매</option>
+		                </select>
+		            </div>
 				</div>
 			</div>
 			<div class="mb-3 row">
@@ -58,8 +61,8 @@
 			</div>
 			<div class="mb-3 row">
 				<div class="col-sm-offset-2 col-sm-10 ">
-				 <input type="submit" class="btn btn-primary " value="등록 ">				
-				<input type="reset" class="btn btn-primary " value="취소 ">
+					<input type="submit" class="btn btn-primary " value="등록 ">				
+					<input type="reset" class="btn btn-primary " value="취소 ">
 				</div>
 			</div>
 		</form>
