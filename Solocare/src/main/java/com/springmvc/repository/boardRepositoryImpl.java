@@ -45,7 +45,7 @@ public class boardRepositoryImpl implements boardRepository{
 	// Read All
 	@Override
 	public ArrayList<board> readall(String category, int page, int pageSize) {
-	    System.out.println("boardRepositoryImpl readtipall() with pagination");
+	    System.out.println("boardRepositoryImpl readall() with pagination");
 
 	    ArrayList<board> listofboard = new ArrayList<board>();
 	    try {
@@ -118,7 +118,7 @@ public class boardRepositoryImpl implements boardRepository{
 			}
 			
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 		return board;
 	}
@@ -213,6 +213,20 @@ public class boardRepositoryImpl implements boardRepository{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void incrementhit(int num) {
+		try {
+			conn=DBConnection.getConnection();
+			String sql = "update board set hit = hit+1 where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

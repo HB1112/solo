@@ -22,5 +22,7 @@ public interface boardRepository {
 
 	int getsearchBoardCount(String items, String text, String category);
 
+	void incrementhit(int num);
+
 
 }

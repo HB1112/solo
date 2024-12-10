@@ -1,5 +1,6 @@
 package com.springmvc.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.domain.board;
+import com.springmvc.domain.comment;
 import com.springmvc.service.boardService;
+import com.springmvc.service.commentService;
 
 
 
@@ -46,6 +49,10 @@ public class boardcontroller {
         model.addAttribute("boardlist", boardlist);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
+        
+     // 시작 번호 계산 (최신 게시물부터 시작)
+        int startNumber = totalBoards - (page - 1) * pageSize; // 현재 페이지의 시작 번호
+        model.addAttribute("startNumber", startNumber);
 		
 		return "board/"+category;
 	}
@@ -83,8 +90,12 @@ public class boardcontroller {
 	@GetMapping("/detail")
 	public String goboarddetail(@RequestParam int num, Model model) {
 		System.out.println("boardcontroller goboarddetail()");
+		
 		board board = new board();
+		// 조회수 증가
+		boardservice.incrementhit(num);
 		board = boardservice.readoneboard(num);
+		
 		model.addAttribute("board",board);
 		return "board/boardone";
 	}
@@ -98,18 +109,22 @@ public class boardcontroller {
 	}
 	@PostMapping("/writeboard")
 	public String addboard(@ModelAttribute board board) {
-		System.out.println("boardcontroller addboard()");
-		
-		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd");
-		String regist_date = formatter.format(new java.util.Date());
-				
-		board.setHit(0);
-		board.setRegist_date(regist_date);
-		
-		boardservice.addboard(board);
-	
-		return "redirect:/board?category="+board.getCategory();
+	    System.out.println("boardcontroller addboard()");
+
+	    // 현재 날짜 및 시간 포맷 설정
+	    java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm");
+	    String regist_date = formatter.format(new java.util.Date());
+	    
+	    // 게시글 기본 정보 설정
+	    board.setHit(0);
+	    board.setRegist_date(regist_date);
+
+	    // 게시글 추가
+	    boardservice.addboard(board);
+
+	    return "redirect:/board?category=" + board.getCategory();
 	}
+
 	// Update
 	@GetMapping("/updateboard")
 	public String updateboard(@RequestParam int num, Model model) {
@@ -122,17 +137,17 @@ public class boardcontroller {
 	public String updateboard(@ModelAttribute board board) {
 		System.out.println("boardcontroller POST updateboard()");
 		System.out.println("수정 카테고리 : "+board.getCategory());
+			
 		boardservice.updateboard(board);
 		
-		return "redirect:/board?category=";
+		return "redirect:/board?category="+board.getCategory();
 	}
 	// Delete
 	@GetMapping("/deleteboard")
-	public String deleteboard(@RequestParam int num) {
+	public String deleteboard(@RequestParam int num, @RequestParam String category) {
 		System.out.println("boardcontroller deleteboard()");
 		boardservice.deleteboard(num);
-		return "redirect:/tipboard?category=tip";
+		return "redirect:/board?category="+category;
 	}
-	
 	
 }

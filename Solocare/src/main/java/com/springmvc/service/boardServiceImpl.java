@@ -58,5 +58,11 @@ public class boardServiceImpl implements boardService {
 		
 		return  boardrepository.getsearchBoardCount(items, text, category);
 	}
+
+	@Override
+	public void incrementhit(int num) {
+		boardrepository.incrementhit(num);
+		
+	}
 	
 }

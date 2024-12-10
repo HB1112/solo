@@ -23,4 +23,6 @@ public interface boardService {
 
 	int getsearchBoardCount(String items, String text, String category);
 
+	void incrementhit(int num);
+
 }
